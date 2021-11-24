@@ -10,16 +10,23 @@ void Game::initWindow()
 	this->window->setVerticalSyncEnabled(false);
 }
 
+void Game::initPlayer()
+{
+	this->player = new Player();
+}
+
 //con/des
 Game::Game()
 {
 	this->initWindow();
+	this->initPlayer();
 }
 
 
 Game::~Game()
 {
 	delete this->window;
+	delete this->player;
 }
 
 //functions 
@@ -43,10 +50,28 @@ void Game::update()
 			this->window->close();
 		}
 	}
+
+	//move Player
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+		this->player->move(-1.f, 0.f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+		this->player->move(1.f, 0.f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
+		this->player->move(0.f, -1.f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
+		this->player->move(0.f, 1.f);
+	}
 }
 
 void Game::render()
 {
 	this->window->clear();
+
+	//drawings
+	this->player->render(*this->window);
+
 	this->window->display();
 }
