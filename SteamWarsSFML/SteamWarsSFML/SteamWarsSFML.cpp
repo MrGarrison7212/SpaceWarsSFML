@@ -1,28 +1,34 @@
 // SteamWarsSFML.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+
 #include "pch.h"
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include "Game.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Works");
+	Game game;
 
-	while (window.isOpen()) {
-
-		sf::Event event;
-		while (window.pollEvent(event)) {
-
-
-		}
-
-		window.clear();
-		window.display();
-	}
+	game.run();
 
 	return 0;
 }
+
+
+	//sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Works");
+
+	//while (window.isOpen()) {
+
+	//	sf::Event event;
+	//	while (window.pollEvent(event)) {
+
+
+	//	}
+
+	//	window.clear();
+	//	window.display();
+	//}
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
