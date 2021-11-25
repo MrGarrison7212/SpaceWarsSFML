@@ -18,6 +18,8 @@ public:
 	Player();
 	virtual ~Player();
 
+	//accessor
+	const sf::Vector2f& getPos() const;
 	
 	//functions
 	void move(const float dirX, const float dirY);

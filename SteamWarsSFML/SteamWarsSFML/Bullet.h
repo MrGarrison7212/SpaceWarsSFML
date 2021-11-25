@@ -14,8 +14,11 @@ private:
 
 public:
 	Bullet();
-	Bullet(sf::Texture& texture, float dir_X, float dir_Y, float movement_speed);
+	Bullet(sf::Texture* texture, float pos_x, float pos_y, float dir_X, float dir_Y, float movement_speed);
 	virtual ~Bullet();
+
+	//accessor
+	const sf::FloatRect getBounds() const;
 
 	void update();
 	void render(sf::RenderTarget* target);
