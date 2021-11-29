@@ -20,7 +20,12 @@ void Game::initPlayer()
 {
 	this->player = new Player();
 
-	this->enemy = new Enemy(20.f, 20.f);
+}
+
+void Game::initEnemies()
+{
+	this->spawnTimerMax = 50.f;
+	this->spawnTimer = this->spawnTimerMax;
 }
 
 //con/des
@@ -29,6 +34,7 @@ Game::Game()
 	this->initWindow();
 	this->initTextures();
 	this->initPlayer();
+	this->initEnemies();
 }
 
 
@@ -43,6 +49,10 @@ Game::~Game()
 	}
 	//deleting bullets
 	for (auto *i : this->bullets) {
+		delete i;
+	}
+	//delete all enemies
+	for (auto *i : this->enemies) {
 		delete i;
 	}
 }
@@ -109,12 +119,25 @@ void Game::updateBullets()
 	}
 }
 
+void Game::updateEnemies()
+{
+	this->spawnTimer += 0.5f;
+	if (this->spawnTimer >= this->spawnTimerMax) {
+		this->enemies.push_back(new Enemy(rand() % 200, rand() % 200));
+		this->spawnTimer = 0.f;
+	}
+	for (auto *enemy : this->enemies) {
+		enemy->update();
+	}
+}
+
 void Game::update()
 {
 	this->updatePollEvents();
 	this->updateInputs();
 	this->player->update();
 	this->updateBullets();
+	this->updateEnemies();
 }
 
 void Game::render()
@@ -128,7 +151,9 @@ void Game::render()
 		bullet->render(this->window);
 	}
 
-	this->enemy->render(this->window);
+	for (auto *enemy : this->enemies) {
+		enemy->render(this->window);
+	}
 
 	this->window->display();
 }
