@@ -3,6 +3,8 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include <map>
+#include <string>
+#include <sstream>
 
 class Game
 {
@@ -20,7 +22,8 @@ private:
 	//World
 	sf::Texture worldBackground_tex;
 	sf::Sprite worldBackground;
-
+	//Systems
+	unsigned points;
 	//Player
 	Player* player;
 	//Enemies
@@ -36,7 +39,7 @@ private:
 	void initTextures();
 	void initGUI();
 	void initBackground();
-
+	void initSystems();
 	void initPlayer();
 	void initEnemies();
 

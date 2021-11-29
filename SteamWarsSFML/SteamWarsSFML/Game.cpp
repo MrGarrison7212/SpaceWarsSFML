@@ -25,7 +25,7 @@ void Game::initGUI()
 
 	//init
 	this->pointText.setFont(this->font);
-	this->pointText.setCharacterSize(12);
+	this->pointText.setCharacterSize(20);
 	this->pointText.setFillColor(sf::Color::White);
 	this->pointText.setString("test");
 }
@@ -36,6 +36,11 @@ void Game::initBackground()
 		std::cout << "ERROR::GAME::Failed to load background" << "\n";
 	};
 	this->worldBackground.setTexture(this->worldBackground_tex);
+}
+
+void Game::initSystems()
+{
+	this->points = 0;
 }
 
 void Game::initPlayer()
@@ -57,6 +62,7 @@ Game::Game()
 	this->initTextures();
 	this->initGUI();
 	this->initBackground();
+	this->initSystems();
 	this->initPlayer();
 	this->initEnemies();
 }
@@ -128,7 +134,9 @@ void Game::updateInputs()
 
 void Game::updateGUI()
 {
-
+	std::stringstream ss;
+	ss << "  Points: " << this->points;
+	this->pointText.setString(ss.str());
 }
 
 void Game::updateBackground()
