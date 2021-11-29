@@ -30,6 +30,14 @@ void Game::initGUI()
 	this->pointText.setString("test");
 }
 
+void Game::initBackground()
+{
+	if (!this->worldBackground_tex.loadFromFile("Data/background1.jpg")) {
+		std::cout << "ERROR::GAME::Failed to load background" << "\n";
+	};
+	this->worldBackground.setTexture(this->worldBackground_tex);
+}
+
 void Game::initPlayer()
 {
 	this->player = new Player();
@@ -48,6 +56,7 @@ Game::Game()
 	this->initWindow();
 	this->initTextures();
 	this->initGUI();
+	this->initBackground();
 	this->initPlayer();
 	this->initEnemies();
 }
@@ -186,10 +195,16 @@ void Game::renderGUI()
 	this->window->draw(this->pointText);
 }
 
+void Game::renderBackground()
+{
+	this->window->draw(this->worldBackground);
+}
+
 void Game::render()
 {
 	this->window->clear();
-
+	//background stuff
+	this->renderBackground();
 	//drawings
 	this->player->render(*this->window);
 
