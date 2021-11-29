@@ -131,6 +131,31 @@ void Game::updateGUI()
 
 }
 
+void Game::updateBackground()
+{
+
+}
+
+void Game::updateCollision()
+{
+	//out of bounds-left
+	if (this->player->getBounds().left < 0.f) {
+		this->player->setPosition(0.f, this->player->getBounds().top);
+	}
+	//out of bounds-right
+	else if (this->player->getBounds().left + this->player->getBounds().width >= this->window->getSize().x) {
+		this->player->setPosition(this->window->getSize().x - this->player->getBounds().width, this->player->getBounds().top);
+	}
+	//out of bounds-top
+	if (this->player->getBounds().top < 0.f) {
+		this->player->setPosition(this->player->getBounds().left, 0.f);
+	}
+	//out of bounds-down
+	else if (this->player->getBounds().top + this->player->getBounds().height >= this->window->getSize().y) {
+		this->player->setPosition(this->player->getBounds().left, this->window->getSize().y - this->player->getBounds().height);
+	}
+}
+
 void Game::updateBullets()
 {
 	unsigned counter = 0;
@@ -184,10 +209,11 @@ void Game::update()
 	this->updatePollEvents();
 	this->updateInputs();
 	this->player->update();
+	this->updateCollision();
 	this->updateBullets();
 	this->updateEnemiesAndCombat();
 	this->updateGUI();
-
+	this->updateBackground();
 }
 
 void Game::renderGUI()

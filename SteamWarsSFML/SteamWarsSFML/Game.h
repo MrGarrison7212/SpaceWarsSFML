@@ -51,6 +51,8 @@ public:
 	void updatePollEvents();
 	void updateInputs();
 	void updateGUI();
+	void updateBackground();
+	void updateCollision();
 	void updateBullets();
 	void updateEnemiesAndCombat(); 
 	void update();
