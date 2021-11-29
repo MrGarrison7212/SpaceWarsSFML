@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "Bullet.h"
+#include "Enemy.h"
 #include <map>
 
 class Game
@@ -15,6 +16,7 @@ private:
 	//Player
 	Player* player;
 	//private functions
+	Enemy* enemy;
 
 	void initWindow();
 	void initTextures();
