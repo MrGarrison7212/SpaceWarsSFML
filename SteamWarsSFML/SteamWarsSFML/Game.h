@@ -39,7 +39,7 @@ public:
 	void updatePollEvents();
 	void updateInputs();
 	void updateBullets();
-	void updateEnemies();
+	void updateEnemiesAndCombat();
 	void update();
 	void render();
 

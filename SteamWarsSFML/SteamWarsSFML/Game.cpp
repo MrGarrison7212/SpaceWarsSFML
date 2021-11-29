@@ -120,7 +120,7 @@ void Game::updateBullets()
 	}
 }
 
-void Game::updateEnemies()
+void Game::updateEnemiesAndCombat()
 {
 	this->spawnTimer += 0.5f;
 	if (this->spawnTimer >= this->spawnTimerMax) {
@@ -128,11 +128,24 @@ void Game::updateEnemies()
 		this->spawnTimer = 0.f;
 	}
 	for (int i = 0; i < this->enemies.size(); i++) {
+		bool enemy_removed = false;
 		this->enemies[i]->update();
+		//Remove enemy/bullet collision
+
+		for (size_t k = 0; k < this->bullets.size() && !enemy_removed; k++){
+			if (this->bullets[k]->getBounds().intersects(this->enemies[i]->getBounds())) {
+				this->bullets.erase(this->bullets.begin() + k);
+				this->enemies.erase(this->enemies.begin() + i);
+				enemy_removed = true;
+			}
+		}
 		//Remove enemy at the bottom of the screen
-		if (this->enemies[i]->getBounds().top > this->window->getSize().y) {
-			this->enemies.erase(this->enemies.begin() + i);
-			std::cout << this->enemies.size() << "\n";
+		if (!enemy_removed) {
+			if (this->enemies[i]->getBounds().top > this->window->getSize().y) {
+				this->enemies.erase(this->enemies.begin() + i);
+				std::cout << this->enemies.size() << "\n";
+				enemy_removed = true;
+			}
 		}
 	}
 }
@@ -143,7 +156,7 @@ void Game::update()
 	this->updateInputs();
 	this->player->update();
 	this->updateBullets();
-	this->updateEnemies();
+	this->updateEnemiesAndCombat();
 }
 
 void Game::render()
