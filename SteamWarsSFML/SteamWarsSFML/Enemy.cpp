@@ -12,7 +12,7 @@ void Enemy::initShapes()
 void Enemy::initVariables()
 {
 	this->type = 0;
-	this->speed = 3.f;
+	this->speed = 2.f;
 	this->hp = 0;
 	this->hpMax = 10;
 	this->damage = 1;

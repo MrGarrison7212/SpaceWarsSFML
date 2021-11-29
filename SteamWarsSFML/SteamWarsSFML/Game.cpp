@@ -16,6 +16,20 @@ void Game::initTextures()
 	this->textures["BULLET"]->loadFromFile("Data/bullet.png");
 }
 
+void Game::initGUI()
+{
+	//loadfonts
+	if (!this->font.loadFromFile("Data/SpaceMission-rgyw9.otf")) {
+		std::cout << "ERROR::GAME::Failed to load font" << "\n";
+	};
+
+	//init
+	this->pointText.setFont(this->font);
+	this->pointText.setCharacterSize(12);
+	this->pointText.setFillColor(sf::Color::White);
+	this->pointText.setString("test");
+}
+
 void Game::initPlayer()
 {
 	this->player = new Player();
@@ -33,6 +47,7 @@ Game::Game()
 {
 	this->initWindow();
 	this->initTextures();
+	this->initGUI();
 	this->initPlayer();
 	this->initEnemies();
 }
@@ -102,6 +117,11 @@ void Game::updateInputs()
 	}
 }
 
+void Game::updateGUI()
+{
+
+}
+
 void Game::updateBullets()
 {
 	unsigned counter = 0;
@@ -157,6 +177,13 @@ void Game::update()
 	this->player->update();
 	this->updateBullets();
 	this->updateEnemiesAndCombat();
+	this->updateGUI();
+
+}
+
+void Game::renderGUI()
+{
+	this->window->draw(this->pointText);
 }
 
 void Game::render()
@@ -173,6 +200,8 @@ void Game::render()
 	for (auto *enemy : this->enemies) {
 		enemy->render(this->window);
 	}
+
+	this->renderGUI();
 
 	this->window->display();
 }
