@@ -44,6 +44,11 @@ const sf::Vector2f & Player::getPos() const
 	return this->sprite.getPosition();
 }
 
+const sf::FloatRect Player::getBounds() const
+{
+	return this->sprite.getGlobalBounds();
+}
+
 
 void Player::move(const float dirX, const float dirY)
 {
