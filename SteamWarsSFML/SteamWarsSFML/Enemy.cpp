@@ -12,6 +12,7 @@ void Enemy::initShapes()
 void Enemy::initVariables()
 {
 	this->type = 0;
+	this->speed = 3.f;
 	this->hp = 0;
 	this->hpMax = 10;
 	this->damage = 1;
@@ -22,6 +23,7 @@ void Enemy::initVariables()
 
 void Enemy::update()
 {
+	this->shape.move(0.f, this->speed);
 }
 
 void Enemy::render(sf::RenderTarget * target)
@@ -40,4 +42,9 @@ Enemy::Enemy(float pos_x, float pos_y )
 
 Enemy::~Enemy()
 {
+}
+
+const sf::FloatRect Enemy::getBounds() const
+{
+	return this->shape.getGlobalBounds();
 }
