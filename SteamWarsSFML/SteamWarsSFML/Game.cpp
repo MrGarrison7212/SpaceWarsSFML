@@ -196,8 +196,12 @@ void Game::updateEnemiesAndCombat()
 
 		for (size_t k = 0; k < this->bullets.size() && !enemy_removed; k++){
 			if (this->bullets[k]->getBounds().intersects(this->enemies[i]->getBounds())) {
+
+				this->points += this->enemies[i]->getPoints();
+
 				this->bullets.erase(this->bullets.begin() + k);
 				this->enemies.erase(this->enemies.begin() + i);
+
 				enemy_removed = true;
 			}
 		}

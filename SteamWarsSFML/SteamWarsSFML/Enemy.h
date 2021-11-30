@@ -23,6 +23,7 @@ public:
 
 	//accessors
 	const sf::FloatRect getBounds() const;
+	const int& getPoints() const;
 
 	//functions
 	void update();

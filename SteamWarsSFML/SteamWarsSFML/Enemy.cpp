@@ -49,3 +49,8 @@ const sf::FloatRect Enemy::getBounds() const
 {
 	return this->shape.getGlobalBounds();
 }
+
+const int & Enemy::getPoints() const
+{
+	return this->points;
+}
