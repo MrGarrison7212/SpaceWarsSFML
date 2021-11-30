@@ -5,6 +5,7 @@
 class Enemy
 {
 private:
+	unsigned pointCount;
 	sf::CircleShape shape;
 	int type;
 	float speed;
@@ -12,10 +13,9 @@ private:
 	int hpMax;
 	int damage;
 	int points;
-
-	void initShapes();
+	
 	void initVariables();
-
+	void initShapes();
 
 public:
 	Enemy(float pos_x, float pos_y);

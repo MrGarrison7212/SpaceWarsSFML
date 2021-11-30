@@ -2,23 +2,23 @@
 #include "Enemy.h"
 
 
-void Enemy::initShapes()
-{
-	this->shape.setRadius(rand() % 20 + 20);
-	this->shape.setPointCount(rand() % 20 + 3);
-	this->shape.setFillColor(sf::Color(rand()%255 + 1, rand() % 255 + 1, rand() % 255 + 1, 255));
-}
-
 void Enemy::initVariables()
 {
+	this->pointCount = rand() % 8 + 3;
 	this->type = 0;
-	this->speed = 2.f;
-	this->hp = 0;
-	this->hpMax = 10;
-	this->damage = 1;
-	this->points = 5  ;
+	this->speed = static_cast<float>(this->pointCount/3);
+	this->hpMax = static_cast<int>(this->pointCount);
+	this->hp = this->hpMax;
+	this->damage = this->pointCount;
+	this->points = this->pointCount;
 }
 
+void Enemy::initShapes()
+{
+	this->shape.setRadius(this->pointCount * 3);
+	this->shape.setPointCount(this->pointCount);
+	this->shape.setFillColor(sf::Color(rand() % 255 + 1, rand() % 255 + 1, rand() % 255 + 1, 255));
+}
 //functions
 
 void Enemy::update()
@@ -33,8 +33,9 @@ void Enemy::render(sf::RenderTarget * target)
 
 Enemy::Enemy(float pos_x, float pos_y )
 {
-	this->initShapes();
 	this->initVariables();
+	this->initShapes();
+	 
 	this->shape.setPosition(pos_x, pos_y);
 
 }
