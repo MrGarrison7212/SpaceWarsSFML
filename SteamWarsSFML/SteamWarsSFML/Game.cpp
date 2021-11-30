@@ -209,7 +209,10 @@ void Game::updateEnemiesAndCombat()
 		if (!enemy_removed) {
 			if (this->enemies[i]->getBounds().top > this->window->getSize().y) {
 				this->enemies.erase(this->enemies.begin() + i);
-				std::cout << this->enemies.size() << "\n";
+				enemy_removed = true;
+			}
+			else if (this->enemies[i]->getBounds().intersects(this->player->getBounds())) {
+				this->enemies.erase(this->enemies.begin() + i);
 				enemy_removed = true;
 			}
 		}
