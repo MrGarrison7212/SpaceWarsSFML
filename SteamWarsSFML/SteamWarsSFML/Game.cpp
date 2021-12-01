@@ -137,6 +137,14 @@ void Game::updateGUI()
 	std::stringstream ss;
 	ss << "  Points: " << this->points;
 	this->pointText.setString(ss.str());
+
+	//init player GUI
+	this->playerHpBar.setSize(sf::Vector2f(300.f, 25.f));
+	this->playerHpBar.setFillColor(sf::Color::Green);
+	this->playerHpBar.setPosition(sf::Vector2f(20.f, 20.f));
+
+	this->playerHpBarBack = this->playerHpBar;
+	this->playerHpBarBack.setFillColor(sf::Color::Red);
 }
 
 void Game::updateBackground()
@@ -234,6 +242,8 @@ void Game::update()
 void Game::renderGUI()
 {
 	this->window->draw(this->pointText);
+	this->window->draw(this->playerHpBarBack);
+	this->window->draw(this->playerHpBar);
 }
 
 void Game::renderBackground()

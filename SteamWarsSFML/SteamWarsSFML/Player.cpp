@@ -8,6 +8,9 @@ void Player::initVariables()
 
 	this->attackCooldownMax = 10.f;
 	this->attackCooldown = this->attackCooldownMax;
+	
+	this->hpMax = 10;
+	this->hp = this->hpMax;
 
 }
 
@@ -26,6 +29,7 @@ void Player::initSprite()
 	//resize the sprite
 	this->sprite.scale(0.2f, 0.2f);
 }
+
 
 Player::Player()
 {
@@ -47,6 +51,16 @@ const sf::Vector2f & Player::getPos() const
 const sf::FloatRect Player::getBounds() const
 {
 	return this->sprite.getGlobalBounds();
+}
+
+const int & Player::getHp() const
+{
+	return this->hp;
+}
+
+const int & Player::getHpMax() const
+{
+	return this->hpMax;
 }
 
 void Player::setPosition(const sf::Vector2f pos)
