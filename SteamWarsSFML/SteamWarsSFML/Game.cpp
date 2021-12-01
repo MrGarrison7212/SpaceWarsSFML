@@ -28,6 +28,14 @@ void Game::initGUI()
 	this->pointText.setCharacterSize(20);
 	this->pointText.setFillColor(sf::Color::White);
 	this->pointText.setString("test");
+
+	//init player GUI
+	this->playerHpBar.setSize(sf::Vector2f(300.f, 25.f));
+	this->playerHpBar.setFillColor(sf::Color::Green);
+	this->playerHpBar.setPosition(sf::Vector2f(20.f, 20.f));
+
+	this->playerHpBarBack = this->playerHpBar;
+	this->playerHpBarBack.setFillColor(sf::Color::Red);
 }
 
 void Game::initBackground()
@@ -138,13 +146,10 @@ void Game::updateGUI()
 	ss << "  Points: " << this->points;
 	this->pointText.setString(ss.str());
 
-	//init player GUI
-	this->playerHpBar.setSize(sf::Vector2f(300.f, 25.f));
-	this->playerHpBar.setFillColor(sf::Color::Green);
-	this->playerHpBar.setPosition(sf::Vector2f(20.f, 20.f));
-
-	this->playerHpBarBack = this->playerHpBar;
-	this->playerHpBarBack.setFillColor(sf::Color::Red);
+	//update Player GUI
+	this->player->setHp(5);
+	float hpPercent = static_cast<float>(this->player->getHp()) / this->player->getHpMax();
+	this->playerHpBar.setSize(sf::Vector2f(300.f * hpPercent, this->playerHpBar.getSize().y));
 }
 
 void Game::updateBackground()

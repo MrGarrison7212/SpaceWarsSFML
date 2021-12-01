@@ -73,6 +73,16 @@ void Player::setPosition(const float x, const float y)
 	this->sprite.setPosition(x, y);
 }
 
+void Player::setHp(const int hp)
+{
+	this->hp = hp;
+}
+
+void Player::loseHp(const int value)
+{
+	this->hp -= value;
+}
+
 
 void Player::move(const float dirX, const float dirY)
 {
