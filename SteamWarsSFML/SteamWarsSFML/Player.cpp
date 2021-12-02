@@ -9,7 +9,7 @@ void Player::initVariables()
 	this->attackCooldownMax = 10.f;
 	this->attackCooldown = this->attackCooldownMax;
 	
-	this->hpMax = 10;
+	this->hpMax = 100;
 	this->hp = this->hpMax;
 
 }
@@ -81,6 +81,9 @@ void Player::setHp(const int hp)
 void Player::loseHp(const int value)
 {
 	this->hp -= value;
+	if (this->hp < 0) {
+		this->hp = 0;
+	}
 }
 
 

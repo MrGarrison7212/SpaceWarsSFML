@@ -24,6 +24,7 @@ public:
 	//accessors
 	const sf::FloatRect getBounds() const;
 	const int& getPoints() const;
+	const int& getDamage() const;
 
 	//functions
 	void update();

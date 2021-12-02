@@ -29,6 +29,12 @@ void Game::initGUI()
 	this->pointText.setFillColor(sf::Color::White);
 	this->pointText.setString("test");
 
+	//game over
+	this->gameOver.setFont(this->font);
+	this->gameOver.setCharacterSize(60);
+	this->gameOver.setFillColor(sf::Color::Yellow);
+	this->gameOver.setString("Game Over !");
+
 	//init player GUI
 	this->playerHpBar.setSize(sf::Vector2f(300.f, 25.f));
 	this->playerHpBar.setFillColor(sf::Color::Green);
@@ -147,7 +153,6 @@ void Game::updateGUI()
 	this->pointText.setString(ss.str());
 
 	//update Player GUI
-	this->player->setHp(5);
 	float hpPercent = static_cast<float>(this->player->getHp()) / this->player->getHpMax();
 	this->playerHpBar.setSize(sf::Vector2f(300.f * hpPercent, this->playerHpBar.getSize().y));
 }
@@ -224,7 +229,11 @@ void Game::updateEnemiesAndCombat()
 				this->enemies.erase(this->enemies.begin() + i);
 				enemy_removed = true;
 			}
+			//player/enemy collision
 			else if (this->enemies[i]->getBounds().intersects(this->player->getBounds())) {
+				//manage hp lose
+				this->player->loseHp(this->enemies[i]->getDamage());
+
 				this->enemies.erase(this->enemies.begin() + i);
 				enemy_removed = true;
 			}
