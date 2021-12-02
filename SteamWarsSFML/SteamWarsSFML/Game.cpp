@@ -24,16 +24,19 @@ void Game::initGUI()
 	};
 
 	//init
+	this->pointText.setPosition(615, 20.f);
 	this->pointText.setFont(this->font);
-	this->pointText.setCharacterSize(20);
+	this->pointText.setCharacterSize(25);
 	this->pointText.setFillColor(sf::Color::White);
 	this->pointText.setString("test");
 
 	//game over
-	this->gameOver.setFont(this->font);
+	this->gameOver.setFont(this->font); 
 	this->gameOver.setCharacterSize(60);
 	this->gameOver.setFillColor(sf::Color::Yellow);
-	this->gameOver.setString("Game Over !");
+	this->gameOver.setString(" Game Over!");
+	this->gameOver.setPosition(this->window->getSize().x / 2.f - this->gameOver.getGlobalBounds().width / 2.f,
+							   this->window->getSize().y / 2.f - this->gameOver.getGlobalBounds().height / 2.f);
 
 	//init player GUI
 	this->playerHpBar.setSize(sf::Vector2f(300.f, 25.f));
@@ -105,7 +108,11 @@ Game::~Game()
 void Game::run()
 {
 	while (this->window->isOpen()) {
-		this->update();
+		this->updatePollEvents();
+
+		if (this->player->getHp() > 0) {
+			this->update();
+		}
 		this->render();
 	}
 
@@ -243,7 +250,6 @@ void Game::updateEnemiesAndCombat()
 
 void Game::update()
 {
-	this->updatePollEvents();
 	this->updateInputs();
 	this->player->update();
 	this->updateCollision();
@@ -282,6 +288,11 @@ void Game::render()
 	}
 
 	this->renderGUI();
+
+	//gameOverScreen
+	if (this->player->getHp() <= 0) {
+		this->window->draw(this->gameOver);
+	}
 
 	this->window->display();
 }
