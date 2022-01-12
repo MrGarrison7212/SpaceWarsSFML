@@ -62,6 +62,11 @@ void Game::initSoundEffects()
 	this->hit_buf.loadFromFile("Data/hit.wav");
 
 	this->hit_sound.setBuffer(this->hit_buf);
+
+	// ship-hit sound
+	this->ship_hit_buf.loadFromFile("Data/ship_hit.wav");
+
+	this->ship_hit_sound.setBuffer(this->ship_hit_buf);
 }
 
 void Game::initSystems()
@@ -256,6 +261,10 @@ void Game::updateEnemiesAndCombat()
 
 				this->enemies.erase(this->enemies.begin() + i);
 				enemy_removed = true;
+
+				//ship-hit sound
+				this->ship_hit_sound.play();
+
 			}
 		}
 	}

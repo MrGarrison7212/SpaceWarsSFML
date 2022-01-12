@@ -41,7 +41,11 @@ private:
 
 	//Audio effects
 	sf::SoundBuffer hit_buf;
+	sf::SoundBuffer ship_hit_buf;
+
+
 	sf::Sound hit_sound;
+	sf::Sound ship_hit_sound;
 
 
 	//private functions
