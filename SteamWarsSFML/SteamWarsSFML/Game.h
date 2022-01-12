@@ -42,10 +42,14 @@ private:
 	//Audio effects
 	sf::SoundBuffer hit_buf;
 	sf::SoundBuffer ship_hit_buf;
+	sf::SoundBuffer game_over_buf;
+
 
 
 	sf::Sound hit_sound;
 	sf::Sound ship_hit_sound;
+	sf::Sound game_over_sound;
+
 
 
 	//private functions
@@ -74,6 +78,7 @@ public:
 	void updateCollision();
 	void updateBullets();
 	void updateEnemiesAndCombat(); 
+	void updateSoundEffect();
 	void update();
 	void renderGUI();
 	void renderBackground();

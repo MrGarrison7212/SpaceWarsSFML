@@ -67,6 +67,12 @@ void Game::initSoundEffects()
 	this->ship_hit_buf.loadFromFile("Data/ship_hit.wav");
 
 	this->ship_hit_sound.setBuffer(this->ship_hit_buf);
+
+	// game over sound
+
+	this->game_over_buf.loadFromFile("Data/game_over.wav");
+
+	this->game_over_sound.setBuffer(this->game_over_buf);
 }
 
 void Game::initSystems()
@@ -270,6 +276,13 @@ void Game::updateEnemiesAndCombat()
 	}
 }
 
+void Game::updateSoundEffect()
+{
+	if (this->player->getHp() <= 0) {
+		this->game_over_sound.play();
+	}
+}
+
 void Game::update()
 {
 	this->updateInputs();
@@ -279,6 +292,7 @@ void Game::update()
 	this->updateEnemiesAndCombat();
 	this->updateGUI();
 	this->updateBackground();
+	this->updateSoundEffect();
 }
 
 void Game::renderGUI()
