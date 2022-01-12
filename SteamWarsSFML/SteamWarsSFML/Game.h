@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include <SFML/Audio.hpp>
 #include <map>
 #include <string>
 #include <sstream>
@@ -38,6 +39,9 @@ private:
 	float spawnTimerMax;
 	std::vector<Enemy*> enemies;
 
+	//Audio effects
+	sf::SoundBuffer hit_buf;
+	sf::Sound hit_sound;
 
 
 	//private functions
@@ -46,6 +50,7 @@ private:
 	void initTextures();
 	void initGUI();
 	void initBackground();
+	void initSoundEffects();
 	void initSystems();
 	void initPlayer();
 	void initEnemies();

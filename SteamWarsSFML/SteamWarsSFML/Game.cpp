@@ -55,6 +55,15 @@ void Game::initBackground()
 	this->worldBackground.setTexture(this->worldBackground_tex);
 }
 
+void Game::initSoundEffects()
+{
+	// hit sound
+
+	this->hit_buf.loadFromFile("Data/hit.wav");
+
+	this->hit_sound.setBuffer(this->hit_buf);
+}
+
 void Game::initSystems()
 {
 	this->points = 0;
@@ -79,6 +88,7 @@ Game::Game()
 	this->initTextures();
 	this->initGUI();
 	this->initBackground();
+	this->initSoundEffects();
 	this->initSystems();
 	this->initPlayer();
 	this->initEnemies();
@@ -226,6 +236,9 @@ void Game::updateEnemiesAndCombat()
 
 				this->bullets.erase(this->bullets.begin() + k);
 				this->enemies.erase(this->enemies.begin() + i);
+
+				//hit sound effect
+				this->hit_sound.play();
 
 				enemy_removed = true;
 			}
