@@ -44,13 +44,13 @@ private:
 	sf::SoundBuffer ship_hit_buf;
 	sf::SoundBuffer game_over_buf;
 
-
-
 	sf::Sound hit_sound;
 	sf::Sound ship_hit_sound;
 	sf::Sound game_over_sound;
 
+	sf::Music background_music;
 
+	bool stop_music;
 
 	//private functions
 

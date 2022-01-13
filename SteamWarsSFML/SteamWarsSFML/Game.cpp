@@ -73,11 +73,23 @@ void Game::initSoundEffects()
 	this->game_over_buf.loadFromFile("Data/game_over.wav");
 
 	this->game_over_sound.setBuffer(this->game_over_buf);
+
+	//background music
+
+	this->background_music.openFromFile("Data/beat.ogg");
+
+	this->background_music.play();
+	this->background_music.setLoop(true);
+
 }
 
 void Game::initSystems()
 {
 	this->points = 0;
+
+	// music
+	this->stop_music = false;
+
 }
 
 void Game::initPlayer()
@@ -278,9 +290,17 @@ void Game::updateEnemiesAndCombat()
 
 void Game::updateSoundEffect()
 {
+
 	if (this->player->getHp() <= 0) {
+		this->stop_music = true;
 		this->game_over_sound.play();
 	}
+
+	//stop background music
+	if (this->stop_music) {
+		this->background_music.stop();
+	}
+
 }
 
 void Game::update()
