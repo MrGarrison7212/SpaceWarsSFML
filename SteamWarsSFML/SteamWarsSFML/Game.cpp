@@ -89,6 +89,8 @@ void Game::initSystems()
 
 	// music
 	this->stop_music = false;
+	//animation
+	this->doAnimation = false;
 
 }
 
@@ -262,6 +264,8 @@ void Game::updateEnemiesAndCombat()
 
 				//hit sound effect
 				this->hit_sound.play();
+				//animation flag
+				this->doAnimation = true;
 
 				enemy_removed = true;
 			}

@@ -51,6 +51,9 @@ private:
 	sf::Music background_music;
 
 	bool stop_music;
+	
+	//animation
+	bool doAnimation;
 
 	//private functions
 
